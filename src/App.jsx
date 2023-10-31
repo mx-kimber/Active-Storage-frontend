@@ -7,10 +7,10 @@ import LatestAvatar from './Components/LatestAvatar';
 export const AppContext = createContext(null);
 
 function App() {
-  const [latestUser, setLatestUser] = useState(AppContext)
+  const [latestImage, setLatestImage] = useState(AppContext)
 
   return (
-    <AppContext.Provider value={{ latestUser, setLatestUser}}>
+    <AppContext.Provider value={{ latestImage, setLatestImage}}>
     <div className="App">
       <FileForm />
       <LatestAvatar />
