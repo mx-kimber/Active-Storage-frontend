@@ -21,9 +21,9 @@ function FileForm() {
     })
       .then(response => response.json())
       .then(fileData => {
-        setLatestImage(fileData.avatarURL);
+        setLatestImage(fileData.avatar_url);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   return (

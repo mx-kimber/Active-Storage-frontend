@@ -11,7 +11,7 @@ function LatestAvatar() {
     fetch("http://localhost:3000/latest.json")
       .then(response => response.json())
       .then(fileData => {
-        setLatestImage(fileData.avatarURL);
+        setLatestImage(fileData.avatar_url);
       })
       .catch((error) => console.log(error));
   }, [latestImage]);
