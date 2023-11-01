@@ -9,7 +9,7 @@ function FileForm() {
     event.preventDefault();
       const fileData = new FormData();
 
-      data.append("Image[avatar]", event.target.avatar.files[0]);
+      fileData.append("user[avatar]", event.target.avatar.files[0]);
       // change number for images if multiple ^
       sendToRails(fileData);
   }

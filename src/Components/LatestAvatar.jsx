@@ -8,7 +8,7 @@ function LatestAvatar() {
 
   useEffect(() => {
 
-    fetch("http://localhost:3000/users.json")
+    fetch("http://localhost:3000/latest.json")
       .then(response => response.json())
       .then(fileData => {
         setLatestImage(fileData.avatarURL);
@@ -17,7 +17,7 @@ function LatestAvatar() {
   }, [latestImage]);
   return (
     <div>
-      <img src={latestImage} alt ="latest image" className="latest-Image" />
+      <img src={latestImage} alt ="latest image" className="latest-image" />
     </div>
   )
 }
