@@ -12,3 +12,13 @@
   margin: 0 auto;
   display: block;
 }
+
+.input {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1pt solid rgb(51, 255, 0);
+  padding: 10px;
+  
+}
