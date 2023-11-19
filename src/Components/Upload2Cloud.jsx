@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react';
 import "../App.css"
+import axios from 'axios';
 
 export function Upload2Cloud() {
 
-  const uploadImage = (files) => {
-    console.log(files[0]);
-  }
+  const [imageSelected, setImageSelected] = useState();
+
+  const uploadImage = () => {
+    const formData= new FormData()
+    formData.append("file", imageSelected)
+    formData.append("upload_preset", "CLOUDINARY-UPLOAD-PRESET-NAME")
+
+    axios.post(
+      "https://api.cloudinary.com/v1_1/YOUR-CLOUD-NAME/image/upload", 
+      formData
+    ).then((response) => {
+      console.log(response);
+    });
+  
+  };
 
   return (
     <div>
@@ -17,9 +30,10 @@ export function Upload2Cloud() {
         <input 
           type="file"
           onChange={(event) => {
-            uploadImage(event.target.files);
+            setImageSelected(event.target.files[0]);
           }}
         />
+        <button onClick={uploadImage}> Upload Image </button>
       </div>
     </div>
   )
