@@ -1,6 +1,6 @@
-
 import { AppContext } from '../App';
 import React, { useContext } from 'react';
+import axios from 'axios'; 
 
 function FileForm() {
   const { latestImage, setLatestImage } = useContext(AppContext);
@@ -14,14 +14,10 @@ function FileForm() {
       sendToRails(fileData);
   }
 
-  function sendToRails(fileData) { 
-    fetch("http://localhost:3000/users.json", {
-      method: "POST",
-      body: fileData
-    })
-      .then(response => response.json())
-      .then(fileData => {
-        setLatestImage(fileData.avatar_url);
+  function sendToRails(fileData) {
+    axios.post("http://localhost:3000/users.json", fileData)
+      .then(response => {
+        setLatestImage(response.data.avatar_url);
       })
       .catch((error) => console.error(error));
   }

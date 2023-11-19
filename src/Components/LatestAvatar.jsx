@@ -1,20 +1,21 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../App';
-
+import axios from 'axios';
 
 function LatestAvatar() {
 
   const { latestImage, setLatestImage } = useContext(AppContext);
 
   useEffect(() => {
-
-    fetch("http://localhost:3000/latest.json")
-      .then(response => response.json())
-      .then(fileData => {
-        setLatestImage(fileData.avatar_url);
+    axios.get("http://localhost:3000/latest.json")
+      .then(response => {
+        setLatestImage(response.data.avatar_url);
       })
-      .catch((error) => console.log(error));
+      .catch(error => {
+        console.log(error);
+      });
   }, [latestImage]);
+
   return (
     <div>
       <img src={latestImage} alt ="latest image" className="latest-image" />
@@ -22,5 +23,4 @@ function LatestAvatar() {
   )
 }
 
-
-export default LatestAvatar
+export default LatestAvatar;
