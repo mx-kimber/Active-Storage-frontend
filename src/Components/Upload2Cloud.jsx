@@ -3,8 +3,21 @@ import "../App.css"
 import axios from 'axios';
 
 export function Upload2Cloud() {
+  const [imageSelected, setImageSelected] = useState(null);
+  const [cloudinaryUrl, setCloudinaryUrl] = useState(null);
 
-  const [imageSelected, setImageSelected] = useState();
+  const handleImageChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setImageSelected(selectedFile);
+
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCloudinaryUrl(reader.result);
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  };
 
   const uploadImage = () => {
     const formData= new FormData()
@@ -29,11 +42,14 @@ export function Upload2Cloud() {
       <div className="input">
         <input 
           type="file"
-          onChange={(event) => {
-            setImageSelected(event.target.files[0]);
-          }}
+          onChange={handleImageChange}
         />
         <button onClick={uploadImage}> Upload Image </button>
+      </div>
+      <div className="preview-image-container">
+        {cloudinaryUrl && (
+          <img src={cloudinaryUrl} alt="Preview" className="preview-image" />
+        )}
       </div>
     </div>
   )
